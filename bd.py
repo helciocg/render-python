@@ -1,3 +1,4 @@
+import pymysql
 import os
 from dotenv import load_dotenv
 from mysql.connector import Error
@@ -15,10 +16,19 @@ connection = mysql.connector.connect(
 )
 def products():
     dados = []
-    mycursor = connection.cursor()
+    mycursor = connection.cursor(pymysql.cursors.DictCursor)
     mycursor.execute("SELECT * FROM products;")
     dados = mycursor.fetchall()
     return dados
+
+
+def insert_product(product):
+    mycursor = connection.cursor(pymysql.cursors.DictCursor)
+    sql = f"INSERT INTO products(id, name, price) VALUES({product['id']},'{product['name']}',{product['price']});"
+    print(sql)
+    mycursor.execute(sql)
+    connection.commit()
+    return product
 
 if __name__ == '__main__':
     mylist = products()
