@@ -12,5 +12,5 @@ def server_app():
        
     return app
 
-app.run()
+#app.run()
 
