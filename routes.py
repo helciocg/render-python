@@ -1,5 +1,4 @@
-from flask import Blueprint,jsonify
-from flask import jsonify, make_response, request
+from flask import Blueprint, jsonify, make_response, request
 from bd import products, insert_product
 from datetime import date
 
