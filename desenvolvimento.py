@@ -1,19 +1,10 @@
-from flask import Blueprint,jsonify
-from flask import jsonify, make_response, request
-from bd import products, insert_product
-from datetime import date
 
-main = Blueprint('main', __name__)
-
-@main.route('/')
-def hello_world():
-    return {
-        "greeting": ["hello", "world"],
-        "date": date.today()
-    }
-    
-@main.route('/products', methods=['GET'])
-def productsList():
+#desenvolvimento
+from flask import Flask, request, jsonify, make_response
+from bd import products
+from bd import insert_product
+#@app.route('/products', methods=['GET'])
+def productsList_p():
     dados = products()
     print(dados)
     minhalista = []
@@ -32,9 +23,9 @@ def productsList():
         ),
         200
     )
-
-@main.route('/products', methods=['POST'])
-def create_products():
+    
+#@app.route('/products', methods=['POST'])
+def create_products_p():
     product = request.json
     insert_product(product)
     return make_response(

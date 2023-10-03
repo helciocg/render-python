@@ -1,7 +1,5 @@
-import pymysql
 import os
 from dotenv import load_dotenv
-from mysql.connector import Error
 import mysql.connector
 
 load_dotenv("config.env")
@@ -16,14 +14,14 @@ connection = mysql.connector.connect(
 )
 def products():
     dados = []
-    mycursor = connection.cursor(pymysql.cursors.DictCursor)
+    mycursor = connection.cursor()
     mycursor.execute("SELECT * FROM products;")
     dados = mycursor.fetchall()
     return dados
 
 
 def insert_product(product):
-    mycursor = connection.cursor(pymysql.cursors.DictCursor)
+    mycursor = connection.cursor()
     sql = f"INSERT INTO products(id, name, price) VALUES({product['id']},'{product['name']}',{product['price']});"
     print(sql)
     mycursor.execute(sql)
